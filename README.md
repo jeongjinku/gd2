@@ -45,7 +45,7 @@ SUPABASE_URL
 SUPABASE_ANON_KEY
 ```
 
-The build also accepts `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` if your Vercel connector exposes those names instead.
+The build also accepts `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`, `PUBLIC_SUPABASE_URL`, and `PUBLIC_SUPABASE_ANON_KEY` if your Vercel connector exposes those names instead.
 
 7. Deploy.
 
