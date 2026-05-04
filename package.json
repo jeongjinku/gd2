@@ -1,0 +1,12 @@
+{
+  "name": "geometry-dash-2-0",
+  "version": "0.1.0",
+  "private": true,
+  "description": "A neon rhythm platformer prototype inspired by one-button dash games.",
+  "scripts": {
+    "build": "node scripts/write-env.js",
+    "start": "node server.js",
+    "dev": "node server.js",
+    "check": "node --check src/main.js"
+  }
+}
