@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Geometry Dash 2.0 by Justin Ku</title>
+    <link rel="stylesheet" href="./src/styles.css" />
+  </head>
+  <body>
+    <main id="shell">
+      <section id="game-wrap">
+        <div id="game"></div>
+        <div id="split-dividers" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <div id="hud" aria-live="polite">
+          <div class="cluster">
+            <strong id="mode">Normal</strong>
+            <span id="progress">0%</span>
+          </div>
+          <div class="meter">
+            <span id="meter-fill"></span>
+          </div>
+          <div class="cluster right">
+            <span id="score" class="score-pill">Points 0</span>
+            <span id="coins">0 / 3</span>
+            <button id="music" type="button" aria-label="Toggle music">Music</button>
+            <button id="pause" type="button" aria-label="Pause">Ⅱ</button>
+          </div>
+        </div>
+        <div id="mobile-controls" aria-label="Mobile platformer controls">
+          <button id="mobile-left" class="mobile-move" type="button" aria-label="Move left">‹</button>
+          <button id="mobile-right" class="mobile-move" type="button" aria-label="Move right">›</button>
+        </div>
+        <div id="signup-panel" class="panel visible">
+          <div class="brand">
+            <span>Geometry Dash</span>
+            <strong>2.0</strong>
+            <em>by Justin Ku</em>
+          </div>
+          <form id="signup-form" class="signup-box">
+            <label>
+              Player name
+              <input id="signup-name" type="text" maxlength="18" autocomplete="nickname" placeholder="Justin" />
+            </label>
+            <label>
+              Password
+              <input id="signup-password" type="password" maxlength="24" autocomplete="current-password" placeholder="Secret code" />
+            </label>
+            <p id="signup-message" class="signup-message">New name? It signs up free. Returning name? Type the password.</p>
+            <button type="submit">Sign Up / Log In</button>
+          </form>
+        </div>
+        <div id="overlay" class="panel visible">
+          <div class="brand">
+            <span>Geometry Dash</span>
+            <strong>2.0</strong>
+            <em>by Justin Ku</em>
+          </div>
+          <div id="selected-level" class="selected-level">Level 1: Neon Run</div>
+          <div id="level-list" class="level-list" aria-label="Level select"></div>
+          <div class="menu-row">
+            <button id="play" type="button">Play</button>
+            <button id="practice" type="button">Practice</button>
+            <button id="platformer" type="button">Platformer</button>
+            <button id="multiplayer" type="button">Multiplayer</button>
+            <button id="skip-level" type="button">Skip Level</button>
+            <button id="creator-open" type="button">Creator</button>
+            <button id="store-open" type="button">Store</button>
+            <button id="generate-levels" type="button">Generate More Levels</button>
+            <button id="translate" type="button">Translate: English</button>
+            <button id="settings-open" type="button">Settings</button>
+            <button id="help-open" type="button">Help</button>
+            <button id="logout" type="button">Log Out</button>
+            <button id="reset-scores" class="danger-button" type="button">Reset Scores</button>
+          </div>
+          <div id="language-panel" class="language-panel" hidden>
+            <button type="button" data-lang="en">English</button>
+            <button type="button" data-lang="es">Español</button>
+            <button type="button" data-lang="ko">한국어</button>
+            <button type="button" data-lang="ja">日本語</button>
+          </div>
+          <div class="player-count" aria-label="Multiplayer player count" hidden>
+            <span>Players</span>
+            <button class="player-count-button active" type="button" data-count="2">2</button>
+            <button class="player-count-button" type="button" data-count="3">3</button>
+            <button class="player-count-button" type="button" data-count="4">4</button>
+          </div>
+          <div class="stats">
+            <span>Best <strong id="best">0%</strong></span>
+            <span>Score <strong id="best-score">0</strong></span>
+            <span>Coins <strong id="best-coins">0 / 3</strong></span>
+            <span>Total <strong id="total-coins">0 coins · 0 C</strong></span>
+          </div>
+        </div>
+        <div id="pause-panel" class="panel">
+          <div class="brand compact">
+            <span>Paused</span>
+            <strong id="pause-progress">0%</strong>
+          </div>
+          <div class="menu-row">
+            <button id="resume" type="button">Resume</button>
+            <button id="restart" type="button">Restart</button>
+            <button id="exit-save" type="button">Exit and Save Coins</button>
+            <button id="menu" type="button">Menu</button>
+          </div>
+        </div>
+        <div id="settings-panel" class="panel">
+          <div class="brand compact">
+            <span>Settings</span>
+            <strong>2.0</strong>
+          </div>
+          <div class="settings-box">
+            <div class="setting-row">
+              <span>Jump hints</span>
+              <button id="hints-toggle" type="button">On</button>
+            </div>
+            <div class="setting-group">
+              <span>Change password</span>
+              <input id="password-old" type="password" maxlength="24" placeholder="Old password" />
+              <input id="password-new" type="password" maxlength="24" placeholder="New password" />
+              <button id="password-change" type="button">Change Password</button>
+              <em id="password-message" class="signup-message"></em>
+            </div>
+            <div class="setting-group">
+              <span>Character</span>
+              <div id="character-list" class="character-list" aria-label="Character select"></div>
+            </div>
+          </div>
+          <div class="menu-row">
+            <button id="settings-close" type="button">Back</button>
+          </div>
+        </div>
+        <div id="help-panel" class="panel">
+          <div class="brand compact">
+            <span>Help</span>
+            <strong>?</strong>
+          </div>
+          <div class="help-box">
+            <button class="help-topic" type="button" data-help="basics">
+              <strong>Basics</strong>
+              <p>Press Space, Up, W, or tap to jump. Hold Space to keep jumping when you land.</p>
+            </button>
+            <button class="help-topic" type="button" data-help="modes">
+              <strong>Modes</strong>
+              <p>Cube jumps, UFO hops, Ship flies while held, Wave zigzags, Robot jumps higher, and Ball flips gravity.</p>
+            </button>
+            <button class="help-topic" type="button" data-help="coins">
+              <strong>Coins</strong>
+              <p>Collect small coins in levels. Every 10 small coins becomes 1 big C coin for locked bonus levels.</p>
+            </button>
+            <button class="help-topic" type="button" data-help="hacks">
+              <strong>Hacks</strong>
+              <p>Buy hacks in the Store, then click owned hacks to switch them between Using and Unused.</p>
+            </button>
+            <button class="help-topic" type="button" data-help="secret">
+              <strong>Secret Routes</strong>
+              <p>Some levels have hidden hack routes. Example route: in Turbo Circuit, use the first orb and click or tap twice to pop up into the easy hack route.</p>
+            </button>
+            <button class="help-topic" type="button" data-help="creator">
+              <strong>Creator</strong>
+              <p>Open Creator, pick a shape, then click or drag onto the stage. Save it to add your level to the list.</p>
+            </button>
+            <button class="help-topic" type="button" data-help="multiplayer">
+              <strong>Multiplayer</strong>
+              <p>Click Multiplayer, then choose 2 to 4 players. Player buttons are 1, 2, 3, and 4.</p>
+            </button>
+            <div id="help-detail" class="help-detail" hidden>
+              <div class="help-detail-top">
+                <div>
+                  <strong id="help-detail-title">Secret Routes</strong>
+                  <p id="help-detail-text">Pick a topic to see the demo.</p>
+                </div>
+                <button id="help-detail-close" type="button">All</button>
+              </div>
+              <div id="help-demo" class="demo-video" aria-label="Help demo video"></div>
+              <ol id="help-steps" class="help-steps"></ol>
+            </div>
+          </div>
+          <div class="menu-row">
+            <button id="help-close" type="button">Back</button>
+          </div>
+        </div>
+        <div id="store-panel" class="panel">
+          <div class="brand compact">
+            <span>Store</span>
+            <strong id="store-points">0 pts</strong>
+          </div>
+          <div id="store-list" class="store-list" aria-label="Power-up store"></div>
+          <div class="menu-row">
+            <button id="store-close" type="button">Back</button>
+          </div>
+        </div>
+        <div id="creator-panel" class="panel">
+          <div class="brand compact">
+            <span>Creator</span>
+            <strong>Beta</strong>
+          </div>
+          <div class="creator-box">
+            <div class="creator-grid">
+              <label>
+                Name
+                <input id="editor-name" type="text" maxlength="24" value="My Level" />
+              </label>
+              <label>
+                Difficulty
+                <select id="editor-difficulty">
+                  <option>Easy</option>
+                  <option>Normal</option>
+                  <option>Hard</option>
+                  <option>Harder</option>
+                  <option>Insane</option>
+                  <option>Demon</option>
+                </select>
+              </label>
+              <label>
+                Length
+                <select id="editor-length">
+                  <option value="5200">Short</option>
+                  <option value="7200" selected>Medium</option>
+                  <option value="9200">Long</option>
+                </select>
+              </label>
+              <label>
+                Theme
+                <select id="editor-theme">
+                  <option value="neon">Neon</option>
+                  <option value="sunset">Sunset</option>
+                  <option value="toxic">Toxic</option>
+                  <option value="mono">Mono</option>
+                </select>
+              </label>
+            </div>
+            <div class="creator-grid object-grid">
+              <label>
+                Object
+                <select id="editor-object">
+                  <option value="spike">Spike</option>
+                  <option value="ceiling-spike">Ceiling spike</option>
+                  <option value="block">Block</option>
+                  <option value="slope-up">Slope up</option>
+                  <option value="slope-down">Slope down</option>
+                  <option value="gear">Gear</option>
+                  <option value="jump-pad">Jump pad</option>
+                  <option value="jump-orb">Jump orb</option>
+                  <option value="boost-orb">Boost orb</option>
+                  <option value="speed-portal">Speed portal</option>
+                  <option value="gravity-portal">Gravity portal</option>
+                  <option value="wave-portal">Wave portal</option>
+                  <option value="ufo-portal">UFO portal</option>
+                  <option value="ship-portal">Ship portal</option>
+                  <option value="robot-portal">Robot portal</option>
+                  <option value="ball-portal">Ball portal</option>
+                  <option value="cube-portal">Cube portal</option>
+                  <option value="coin">Coin</option>
+                </select>
+              </label>
+              <label>
+                Position
+                <input id="editor-x" type="number" min="420" max="9800" step="60" value="900" />
+              </label>
+              <button id="editor-add" type="button">Add</button>
+            </div>
+            <div id="editor-stage" class="editor-stage" aria-label="Level builder strip">
+              <div class="stage-ground"></div>
+            </div>
+            <div id="editor-list" class="editor-list" aria-live="polite"></div>
+            <div id="editor-palette" class="editor-palette" aria-label="Build toolbar"></div>
+          </div>
+          <div class="menu-row">
+            <button id="editor-save" type="button">Save Level</button>
+            <button id="editor-clear" type="button">Clear</button>
+            <button id="creator-close" type="button">Back</button>
+          </div>
+        </div>
+      </section>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3.90.0/dist/phaser.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="./src/env.generated.js"></script>
+    <script src="./src/main.js"></script>
+  </body>
+</html>
